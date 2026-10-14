@@ -10,15 +10,14 @@ function heatmapLink(event) {
 }
 
 function ClickInfo({ event }) {
-  let label = "";
-  if (event.target) {
-    label = `<${event.target.tag}>`;
-    if (event.target.text) label += ` “${event.target.text}”`;
+  let label = "Clicked on page";
+  if (event.target && event.target.text) {
+    label = `Clicked “${event.target.text}”`;
   }
 
   return (
     <span className="timeline-detail">
-      {label} at ({event.x}, {event.y}) · <Link to={heatmapLink(event)}>see on heatmap</Link>
+      {label} · <Link to={heatmapLink(event)}>see on heatmap</Link>
     </span>
   );
 }

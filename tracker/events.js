@@ -1,6 +1,8 @@
 import { getSessionId, touchSession } from "./session.js";
 import { enqueue } from "./transport.js";
 
+const CLICKABLE = "a, button, input, select, textarea, label, [role='button']";
+
 let lastPageUrl = null;
 
 function currentPageUrl() {
@@ -43,12 +45,23 @@ export function trackClick(e) {
     x: Math.round(e.pageX),
     y: Math.round(e.pageY),
     x_percent: Math.round((e.pageX / pageWidth) * 10000) / 100,
-    target: el ? describe(el) : null,
+    target: el ? describe(el.closest(CLICKABLE) || el) : null,
   });
 }
 
+function firstWordyLine(el) {
+  const lines = (el.innerText || el.textContent || "").split(/\n/);
+  for (const line of lines) {
+    const text = line.trim().replace(/\s+/g, " ");
+    if (/\p{L}/u.test(text)) {
+      return text;
+    }
+  }
+  return "";
+}
+
 function describe(el) {
-  const text = (el.innerText || el.textContent || "").trim().replace(/\s+/g, " ");
+  const text = el.getAttribute("aria-label") || firstWordyLine(el) || el.placeholder || el.alt || "";
   return {
     tag: el.tagName.toLowerCase(),
     id: el.id || null,
