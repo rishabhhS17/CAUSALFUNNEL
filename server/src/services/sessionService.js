@@ -37,7 +37,7 @@ function pageOf(page, limit) {
 export async function findSessions(page, limit) {
   const [result] = await Event.aggregate([
     groupBySession,
-    { $sort: { last_seen: -1, _id: 1 } },
+    { $sort: { first_seen: -1, _id: 1 } },
     pageOf(page, limit),
   ]);
 

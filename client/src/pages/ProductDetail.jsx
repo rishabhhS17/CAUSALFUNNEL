@@ -19,6 +19,7 @@ function ProductDetail({ id }) {
   const [error, setError] = useState(null);
   const [size, setSize] = useState(null);
   const [toast, setToast] = useState(null);
+  const [sizeError, setSizeError] = useState(false);
   const hideToast = useCallback(() => setToast(null), []);
 
   useEffect(() => {
@@ -37,9 +38,18 @@ function ProductDetail({ id }) {
   if (!product) return <div className="status">Loading…</div>;
 
   const needsSize = product.sizes.length > 0;
-  const canBuy = !needsSize || size !== null;
+  const missingSize = needsSize && size === null;
+
+  function selectSize(value) {
+    setSize(value);
+    setSizeError(false);
+  }
 
   function handleAddToCart() {
+    if (missingSize) {
+      setSizeError(true);
+      return;
+    }
     addItem(product, size);
     let text = `${product.name} added to cart`;
     if (size) {
@@ -49,6 +59,10 @@ function ProductDetail({ id }) {
   }
 
   function handleBuyNow() {
+    if (missingSize) {
+      setSizeError(true);
+      return;
+    }
     navigate("/checkout", { state: { buyNow: makeLine(product, size) } });
   }
 
@@ -57,11 +71,11 @@ function ProductDetail({ id }) {
       <div className="detail-left">
         <ProductImage product={product} size="lg" />
         <div className="detail-actions">
-          <button className="btn btn-cart" disabled={!canBuy} onClick={handleAddToCart}>
-            🛒 Add to cart
+          <button className="btn btn-cart" onClick={handleAddToCart}>
+            Add to cart
           </button>
-          <button className="btn btn-buy" disabled={!canBuy} onClick={handleBuyNow}>
-            ⚡ Buy now
+          <button className="btn btn-buy" onClick={handleBuyNow}>
+            Buy now
           </button>
         </div>
       </div>
@@ -80,13 +94,15 @@ function ProductDetail({ id }) {
                 <button
                   key={s}
                   className={`detail-size ${size === s ? "active" : ""}`}
-                  onClick={() => setSize(s)}
+                  aria-label={`Size ${s}`}
+                  onClick={() => selectSize(s)}
                 >
                   {s}
                 </button>
               ))}
             </div>
-            {!size && <div className="detail-hint">Please select a size</div>}
+            {sizeError && <div className="detail-hint detail-hint-error">Please select a size</div>}
+            {!size && !sizeError && <div className="detail-hint">Select a size to continue</div>}
           </div>
         )}
 

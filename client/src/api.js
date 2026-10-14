@@ -19,6 +19,13 @@ export function getProduct(slug) {
 
 export const CATEGORIES = ["clothing", "footwear", "accessories"];
 
+export function itemCount(count) {
+  if (count === 1) {
+    return "1 item";
+  }
+  return `${count} items`;
+}
+
 export function formatPrice(amount) {
   return `₹${amount.toLocaleString("en-IN")}`;
 }

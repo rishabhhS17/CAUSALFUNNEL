@@ -1,39 +1,9 @@
 import { Link, useParams } from "react-router-dom";
 import { getSessionEvents } from "../api.js";
 import { useFetch } from "../hooks/useFetch.js";
-import { formatTime, formatDuration, pagePath, plural } from "../utils/format.js";
+import { formatTime, formatDuration, plural } from "../utils/format.js";
+import Timeline from "../components/Timeline.jsx";
 import "./SessionDetail.css";
-
-function heatmapLink(event) {
-  const params = new URLSearchParams({ url: event.page_url, session: event.session_id });
-  return `/heatmap?${params}`;
-}
-
-function ClickInfo({ event }) {
-  let label = "Clicked on page";
-  if (event.target && event.target.text) {
-    label = `Clicked “${event.target.text}”`;
-  }
-
-  return (
-    <span className="timeline-detail">
-      {label} · <Link to={heatmapLink(event)}>see on heatmap</Link>
-    </span>
-  );
-}
-
-function EventItem({ event, start }) {
-  const isClick = event.event_type === "click";
-
-  return (
-    <li className={isClick ? "timeline-item is-click" : "timeline-item is-view"}>
-      <span className="timeline-time">+{formatDuration(start, event.timestamp)}</span>
-      <span className="timeline-type">{isClick ? "Click" : "Page view"}</span>
-      <span className="timeline-page">{pagePath(event.page_url)}</span>
-      {isClick && <ClickInfo event={event} />}
-    </li>
-  );
-}
 
 function Summary({ events }) {
   const first = events[0].timestamp;
@@ -57,7 +27,6 @@ export default function SessionDetail() {
   if (loading) return <p className="status">Loading journey…</p>;
   if (error) return <p className="status status-error">Could not load this session ({error}).</p>;
 
-  const start = data.events[0].timestamp;
   return (
     <>
       <Link to="/sessions">← All sessions</Link>
@@ -65,11 +34,7 @@ export default function SessionDetail() {
         Session <code>{id}</code>
       </h1>
       <Summary events={data.events} />
-      <ol className="card timeline">
-        {data.events.map((event, i) => (
-          <EventItem key={i} event={event} start={start} />
-        ))}
-      </ol>
+      <Timeline events={data.events} />
     </>
   );
 }

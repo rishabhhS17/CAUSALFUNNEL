@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import ProductCard from "../components/ProductCard.jsx";
-import { CATEGORIES, getProducts } from "../api.js";
+import { CATEGORIES, getProducts, itemCount } from "../api.js";
 import "./Products.css";
 
 export default function Products() {
@@ -46,7 +46,7 @@ export default function Products() {
       <section className="products-list card">
         <h1 className="page-title">
           {category || "All products"}
-          {!loading && <span className="products-count"> ({products.length} items)</span>}
+          {!loading && <span className="products-count"> ({itemCount(products.length)})</span>}
         </h1>
 
         {loading && <div className="status">Loading…</div>}

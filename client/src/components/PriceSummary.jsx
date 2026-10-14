@@ -1,4 +1,4 @@
-import { formatPrice } from "../api.js";
+import { formatPrice, itemCount } from "../api.js";
 import "./PriceSummary.css";
 
 export default function PriceSummary({ count, total, children }) {
@@ -6,7 +6,7 @@ export default function PriceSummary({ count, total, children }) {
     <aside className="price-summary card">
       <h3 className="price-summary-title">Price details</h3>
       <div className="price-summary-row">
-        <span>Price ({count} items)</span>
+        <span>Price ({itemCount(count)})</span>
         <span>{formatPrice(total)}</span>
       </div>
       <div className="price-summary-row">

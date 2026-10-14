@@ -45,13 +45,18 @@ export default function Cart() {
               <div className="cart-item-controls">
                 <button
                   className="cart-qty-btn"
+                  aria-label="Decrease quantity"
                   disabled={item.qty <= 1}
                   onClick={() => setQty(item.key, item.qty - 1)}
                 >
                   −
                 </button>
                 <span className="cart-qty">{item.qty}</span>
-                <button className="cart-qty-btn" onClick={() => setQty(item.key, item.qty + 1)}>
+                <button
+                  className="cart-qty-btn"
+                  aria-label="Increase quantity"
+                  onClick={() => setQty(item.key, item.qty + 1)}
+                >
                   +
                 </button>
                 <button className="cart-remove" onClick={() => removeItem(item.key)}>

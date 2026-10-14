@@ -3,7 +3,12 @@ export function shortId(id) {
 }
 
 export function formatTime(value) {
-  return new Date(value).toLocaleString();
+  return new Date(value).toLocaleString("en-IN", {
+    day: "numeric",
+    month: "short",
+    hour: "numeric",
+    minute: "2-digit",
+  });
 }
 
 export function formatDuration(start, end) {

@@ -5,6 +5,18 @@ import { CATEGORIES, getProducts } from "../api.js";
 import "./Home.css";
 
 const CATEGORY_EMOJI = { clothing: "👕", footwear: "👟", accessories: "🎒" };
+const FEATURED = ["classic-white-tee", "running-shoes", "wrist-watch", "summer-dress"];
+
+function pickFeatured(list) {
+  const featured = [];
+  for (const slug of FEATURED) {
+    const product = list.find((item) => item.slug === slug);
+    if (product) {
+      featured.push(product);
+    }
+  }
+  return featured;
+}
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -12,7 +24,7 @@ export default function Home() {
 
   useEffect(() => {
     getProducts()
-      .then((data) => setProducts(data.slice(0, 4)))
+      .then((data) => setProducts(pickFeatured(data)))
       .catch((err) => setError(err.message));
   }, []);
 

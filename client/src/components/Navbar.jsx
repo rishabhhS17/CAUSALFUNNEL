@@ -16,7 +16,7 @@ export default function Navbar() {
           <NavLink to="/" end>Home</NavLink>
           <NavLink to="/products">Products</NavLink>
           <NavLink to="/cart" className="navbar-cart">
-            🛒 Cart
+            Cart
             {count > 0 && <span className="navbar-badge">{count}</span>}
           </NavLink>
         </nav>

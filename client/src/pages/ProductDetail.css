@@ -80,6 +80,10 @@
 
 .detail-hint {
   margin-top: 8px;
-  color: var(--red);
+  color: var(--muted);
   font-size: 13px;
+}
+
+.detail-hint-error {
+  color: var(--red);
 }

@@ -6,22 +6,30 @@ import "./Overview.css";
 
 const CARDS = [
   { key: "sessions", label: "Sessions" },
-  { key: "total_events", label: "Events" },
   { key: "page_views", label: "Page views" },
   { key: "clicks", label: "Clicks" },
+  { key: "avg_clicks", label: "Avg. clicks per session" },
   { key: "pages", label: "Pages tracked" },
 ];
+
+function avgClicks(stats) {
+  if (stats.sessions === 0) {
+    return 0;
+  }
+  return Math.round((stats.clicks / stats.sessions) * 10) / 10;
+}
 
 function StatCards() {
   const { data, error, loading } = useFetch(getStats, "stats");
   if (loading) return <p className="status">Loading stats…</p>;
   if (error) return <p className="status status-error">Could not load stats: {error}</p>;
 
+  const stats = { ...data, avg_clicks: avgClicks(data) };
   return (
     <div className="stat-cards">
       {CARDS.map((card) => (
         <div key={card.key} className="card stat-card">
-          <div className="stat-value">{data[card.key]}</div>
+          <div className="stat-value">{stats[card.key]}</div>
           <div className="stat-label">{card.label}</div>
         </div>
       ))}
