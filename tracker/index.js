@@ -17,6 +17,7 @@ function start() {
       const id = startSession();
       forgetLastPage();
       trackPageView();
+      flush();
       return id;
     },
   };
