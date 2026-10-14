@@ -6,7 +6,7 @@ import { formatPrice } from "../api.js";
 import "./Cart.css";
 
 export default function Cart() {
-  const { items, count, setQty, removeItem } = useCart();
+  const { items, count, total, setQty, removeItem } = useCart();
   const navigate = useNavigate();
 
   if (items.length === 0) {
@@ -55,7 +55,7 @@ export default function Cart() {
         ))}
       </section>
 
-      <PriceSummary>
+      <PriceSummary count={count} total={total}>
         <button className="btn btn-buy" onClick={() => navigate("/checkout")}>
           Place order
         </button>

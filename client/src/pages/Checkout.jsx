@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import PriceSummary from "../components/PriceSummary.jsx";
 import { useCart } from "../context/CartContext.jsx";
 import "./Checkout.css";
@@ -7,12 +7,27 @@ import "./Checkout.css";
 const EMPTY_FORM = { name: "", phone: "", address: "", city: "", pincode: "", payment: "cod" };
 
 export default function Checkout() {
-  const { items, total, clearCart } = useCart();
+  const cart = useCart();
   const navigate = useNavigate();
+  const location = useLocation();
   const [form, setForm] = useState(EMPTY_FORM);
   const [placed, setPlaced] = useState(false);
 
   if (placed) return null;
+
+  let buyNow = null;
+  if (location.state) {
+    buyNow = location.state.buyNow;
+  }
+
+  let items = cart.items;
+  let count = cart.count;
+  let total = cart.total;
+  if (buyNow) {
+    items = [buyNow];
+    count = 1;
+    total = buyNow.price;
+  }
 
   if (items.length === 0) {
     return <Navigate to="/cart" replace />;
@@ -27,7 +42,9 @@ export default function Checkout() {
     const orderId = `OD${Date.now()}`;
     setPlaced(true);
     navigate("/thank-you", { replace: true, state: { orderId, total, name: form.name } });
-    clearCart();
+    if (!buyNow) {
+      cart.clearCart();
+    }
   }
 
   return (
@@ -78,7 +95,7 @@ export default function Checkout() {
         </div>
       </form>
 
-      <PriceSummary>
+      <PriceSummary count={count} total={total}>
         <button type="submit" form="checkout-form" className="btn btn-buy">
           Confirm order
         </button>

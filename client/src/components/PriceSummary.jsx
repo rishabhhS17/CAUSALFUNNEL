@@ -1,10 +1,7 @@
-import { useCart } from "../context/CartContext.jsx";
 import { formatPrice } from "../api.js";
 import "./PriceSummary.css";
 
-export default function PriceSummary({ children }) {
-  const { count, total } = useCart();
-
+export default function PriceSummary({ count, total, children }) {
   return (
     <aside className="price-summary card">
       <h3 className="price-summary-title">Price details</h3>

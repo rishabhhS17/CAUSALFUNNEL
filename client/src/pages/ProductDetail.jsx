@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ProductImage from "../components/ProductImage.jsx";
-import { useCart } from "../context/CartContext.jsx";
+import Toast from "../components/Toast.jsx";
+import { makeLine, useCart } from "../context/CartContext.jsx";
 import { formatPrice, getProduct } from "../api.js";
 import "./ProductDetail.css";
 
@@ -17,7 +18,8 @@ function ProductDetail({ id }) {
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
   const [size, setSize] = useState(null);
-  const [added, setAdded] = useState(false);
+  const [toast, setToast] = useState(null);
+  const hideToast = useCallback(() => setToast(null), []);
 
   useEffect(() => {
     let ignore = false;
@@ -39,12 +41,15 @@ function ProductDetail({ id }) {
 
   function handleAddToCart() {
     addItem(product, size);
-    setAdded(true);
+    let text = `${product.name} added to cart`;
+    if (size) {
+      text = `${product.name} (Size ${size}) added to cart`;
+    }
+    setToast({ id: Date.now(), text });
   }
 
   function handleBuyNow() {
-    addItem(product, size);
-    navigate("/checkout");
+    navigate("/checkout", { state: { buyNow: makeLine(product, size) } });
   }
 
   return (
@@ -59,7 +64,6 @@ function ProductDetail({ id }) {
             ⚡ Buy now
           </button>
         </div>
-        {added && <div className="detail-added">Added to cart ✓</div>}
       </div>
 
       <div className="detail-info">
@@ -91,6 +95,7 @@ function ProductDetail({ id }) {
           <p>{product.description}</p>
         </div>
       </div>
+      <Toast toast={toast} onDone={hideToast} />
     </div>
   );
 }

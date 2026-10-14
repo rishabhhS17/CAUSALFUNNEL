@@ -7,6 +7,19 @@ function lineKey(slug, size) {
   return size ? `${slug}:${size}` : slug;
 }
 
+export function makeLine(product, size) {
+  return {
+    key: lineKey(product.slug, size),
+    slug: product.slug,
+    name: product.name,
+    price: product.price,
+    color: product.color,
+    emoji: product.emoji,
+    size,
+    qty: 1,
+  };
+}
+
 function cartReducer(items, action) {
   switch (action.type) {
     case "add": {
@@ -18,19 +31,7 @@ function cartReducer(items, action) {
           item.key === key ? { ...item, qty: item.qty + 1 } : item
         );
       }
-      return [
-        ...items,
-        {
-          key,
-          slug: product.slug,
-          name: product.name,
-          price: product.price,
-          color: product.color,
-          emoji: product.emoji,
-          size,
-          qty: 1,
-        },
-      ];
+      return [...items, makeLine(product, size)];
     }
     case "setQty":
       return items.map((item) =>
