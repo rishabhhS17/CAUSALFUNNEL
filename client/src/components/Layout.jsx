@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "./Navbar.jsx";
+import DebugBadge from "./DebugBadge.jsx";
 import "./Layout.css";
 
 export default function Layout() {
@@ -10,6 +11,7 @@ export default function Layout() {
         <Outlet />
       </main>
       <footer className="layout-footer">ShopDemo · a demo store for CausalFunnel analytics</footer>
+      <DebugBadge />
     </>
   );
 }

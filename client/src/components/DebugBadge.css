@@ -1,0 +1,34 @@
+.debug-badge {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 100;
+  padding: 10px 12px;
+  font-size: 12px;
+}
+
+.debug-badge-label {
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.debug-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.debug-badge-id {
+  font-size: 13px;
+}
+
+.debug-badge-button {
+  padding: 4px 8px;
+  border: 1px solid var(--blue);
+  border-radius: 2px;
+  background: var(--card);
+  color: var(--blue);
+  font-size: 12px;
+  cursor: pointer;
+}
