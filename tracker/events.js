@@ -1,5 +1,5 @@
 import { getSessionId, touchSession } from "./session.js";
-import { enqueue } from "./transport.js";
+import { enqueue, flush } from "./transport.js";
 
 const CLICKABLE = "a, button, input, select, textarea, label, [role='button']";
 
@@ -29,6 +29,7 @@ export function trackPageView() {
   }
   lastPageUrl = url;
   record("page_view");
+  flush();
 }
 
 export function forgetLastPage() {

@@ -26,7 +26,8 @@ It has three parts:
 - Anonymous `session_id` kept in `localStorage`; a new session starts after 30 minutes of inactivity.
 - Page views on first load and on every client-side route change (works with single-page apps).
 - Clicks with page coordinates, viewport width, page height and a short label of what was clicked.
-- Events are batched and sent with `navigator.sendBeacon`, so clicks that navigate away are not lost.
+- Page views are sent immediately; clicks are batched. Both use `navigator.sendBeacon`, so clicks that
+  navigate away are not lost.
 
 **Dashboard**
 - **Overview**: totals (sessions, page views, clicks, average clicks per session, pages tracked) and
@@ -197,12 +198,13 @@ MongoDB aggregation when requested. Indexes on `{ session_id, timestamp }` (jour
 *Trade-off:* one source of truth with nothing to keep in sync, but aggregating on every request gets
 slower with millions of events. The fix would be a `sessions` collection updated as events arrive.
 
-**4. Batched events with `sendBeacon`**
-Events are queued and sent every 2 seconds, and also when the tab is hidden or closed. They are sent
-as `text/plain` JSON, which avoids a CORS preflight request.
-*Trade-off:* fewer requests, and clicks that leave the page are not lost, but events reach the server
-up to 2 seconds late. Starting a **New session** sends its first page view immediately, so
-**View journey** never opens an empty session.
+**4. Page views sent immediately, clicks batched, all with `sendBeacon`**
+A page view is sent the moment it happens, so a new session exists on the server straight away and
+**View journey** never opens an empty session. Clicks are queued and sent every 2 seconds, and also
+when the tab is hidden or closed. Everything is sent as `text/plain` JSON, which avoids a CORS
+preflight request.
+*Trade-off:* one request per page view, but far fewer requests for clicks. Clicks can reach the
+server up to 2 seconds late.
 
 **5. Heatmap drawn over a live preview of the page**
 The dashboard loads the real store page in an iframe and draws the clicks on top. The tracker turns
