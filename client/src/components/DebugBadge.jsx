@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import "./DebugBadge.css";
 
+const DASHBOARD_URL = import.meta.env.VITE_DASHBOARD_URL || "http://localhost:5174";
+
 export default function DebugBadge() {
   const tracker = window.CFTracker;
   const [sessionId, setSessionId] = useState(() => tracker?.getSessionId() ?? null);
@@ -26,6 +28,9 @@ export default function DebugBadge() {
           New session
         </button>
       </div>
+      <a className="debug-badge-link" href={`${DASHBOARD_URL}/sessions/${sessionId}`} target="_blank" rel="noreferrer">
+        View journey ↗
+      </a>
     </div>
   );
 }
