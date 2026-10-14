@@ -3,11 +3,19 @@ import ProductImage from "../components/ProductImage.jsx";
 import PriceSummary from "../components/PriceSummary.jsx";
 import { useCart } from "../context/CartContext.jsx";
 import { formatPrice } from "../api.js";
+import { isPreview, previewCart } from "../preview.js";
 import "./Cart.css";
 
 export default function Cart() {
-  const { items, count, total, setQty, removeItem } = useCart();
+  const cart = useCart();
   const navigate = useNavigate();
+  const { setQty, removeItem } = cart;
+
+  let shown = cart;
+  if (isPreview()) {
+    shown = previewCart();
+  }
+  const { items, count, total } = shown;
 
   if (items.length === 0) {
     return (

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import PriceSummary from "../components/PriceSummary.jsx";
 import { useCart } from "../context/CartContext.jsx";
+import { isPreview, previewCart } from "../preview.js";
 import "./Checkout.css";
 
 const EMPTY_FORM = { name: "", phone: "", address: "", city: "", pincode: "", payment: "cod" };
@@ -20,9 +21,14 @@ export default function Checkout() {
     buyNow = location.state.buyNow;
   }
 
-  let items = cart.items;
-  let count = cart.count;
-  let total = cart.total;
+  let shown = cart;
+  if (isPreview()) {
+    shown = previewCart();
+  }
+
+  let items = shown.items;
+  let count = shown.count;
+  let total = shown.total;
   if (buyNow) {
     items = [buyNow];
     count = 1;

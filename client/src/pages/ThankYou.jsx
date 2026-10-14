@@ -1,9 +1,15 @@
 import { Link, Navigate, useLocation } from "react-router-dom";
 import { formatPrice } from "../api.js";
+import { isPreview, previewOrder } from "../preview.js";
 import "./ThankYou.css";
 
 export default function ThankYou() {
-  const { state } = useLocation();
+  const location = useLocation();
+
+  let state = location.state;
+  if (isPreview()) {
+    state = previewOrder();
+  }
 
   if (!state?.orderId) {
     return <Navigate to="/" replace />;
