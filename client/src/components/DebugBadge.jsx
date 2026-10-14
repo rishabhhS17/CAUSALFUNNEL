@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import "./DebugBadge.css";
 
-// Shows the tracker's current session id so testers can find their session.
-// data-cf-ignore stops the tracker from recording clicks on the badge itself.
 export default function DebugBadge() {
   const tracker = window.CFTracker;
   const [sessionId, setSessionId] = useState(() => tracker?.getSessionId() ?? null);
@@ -13,7 +11,6 @@ export default function DebugBadge() {
     return () => window.removeEventListener("cf:session", onSession);
   }, []);
 
-  // Tracker not loaded (API down, or the page is inside the heatmap preview)
   if (!tracker || !sessionId) {
     return null;
   }

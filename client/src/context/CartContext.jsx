@@ -3,7 +3,6 @@ import { createContext, useContext, useEffect, useReducer } from "react";
 const STORAGE_KEY = "shopdemo_cart";
 const CartContext = createContext(null);
 
-// One line per product + size, so "Tee M" and "Tee L" are separate lines
 function lineKey(slug, size) {
   return size ? `${slug}:${size}` : slug;
 }

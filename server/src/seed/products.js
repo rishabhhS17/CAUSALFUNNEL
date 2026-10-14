@@ -1,9 +1,6 @@
-// Fills the database with demo products for the ShopDemo store.
-// Run with: npm run seed  (it replaces any existing products)
-
 import "dotenv/config";
 import mongoose from "mongoose";
-import { connectDB } from "../db.js";
+import { connectDB } from "../config/db.js";
 import { Product } from "../models/Product.js";
 
 const products = [

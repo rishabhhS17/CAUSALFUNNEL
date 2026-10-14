@@ -1,4 +1,3 @@
-// Builds page_view and click events and puts them in the send queue.
 import { getSessionId, touchSession } from "./session.js";
 import { enqueue } from "./transport.js";
 
@@ -24,18 +23,16 @@ function record(type, extra = {}) {
 export function trackPageView() {
   const url = currentPageUrl();
   if (url === lastPageUrl) {
-    return; // same page (e.g. only the query string or hash changed)
+    return;
   }
   lastPageUrl = url;
   record("page_view");
 }
 
-// Lets the next trackPageView() record the current page again (used on a new session)
 export function forgetLastPage() {
   lastPageUrl = null;
 }
 
-// Clicks inside an element marked data-cf-ignore are not recorded
 export function trackClick(e) {
   const el = e.target instanceof Element ? e.target : null;
   if (el?.closest("[data-cf-ignore]")) {

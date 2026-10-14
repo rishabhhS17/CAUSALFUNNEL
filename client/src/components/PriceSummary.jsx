@@ -2,7 +2,6 @@ import { useCart } from "../context/CartContext.jsx";
 import { formatPrice } from "../api.js";
 import "./PriceSummary.css";
 
-// "Price details" box shown on the Cart and Checkout pages
 export default function PriceSummary({ children }) {
   const { count, total } = useCart();
 

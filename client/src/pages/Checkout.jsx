@@ -12,11 +12,8 @@ export default function Checkout() {
   const [form, setForm] = useState(EMPTY_FORM);
   const [placed, setPlaced] = useState(false);
 
-  // Order just placed: the cart is already empty but the move to /thank-you
-  // hasn't rendered yet, so don't let the empty-cart guard redirect to /cart
   if (placed) return null;
 
-  // Nothing to check out
   if (items.length === 0) {
     return <Navigate to="/cart" replace />;
   }
@@ -25,7 +22,6 @@ export default function Checkout() {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
-  // No real payment or orders API: make a fake order id and show the thank-you page
   function handleSubmit(e) {
     e.preventDefault();
     const orderId = `OD${Date.now()}`;

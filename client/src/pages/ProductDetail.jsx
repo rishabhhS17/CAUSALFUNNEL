@@ -5,7 +5,6 @@ import { useCart } from "../context/CartContext.jsx";
 import { formatPrice, getProduct } from "../api.js";
 import "./ProductDetail.css";
 
-// key={id} remounts the page for each product, so size/added state starts fresh
 export default function ProductDetailPage() {
   const { id } = useParams();
   return <ProductDetail key={id} id={id} />;

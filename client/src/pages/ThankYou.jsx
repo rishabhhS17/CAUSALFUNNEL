@@ -5,7 +5,6 @@ import "./ThankYou.css";
 export default function ThankYou() {
   const { state } = useLocation();
 
-  // Only reachable right after placing an order
   if (!state?.orderId) {
     return <Navigate to="/" replace />;
   }

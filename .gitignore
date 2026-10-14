@@ -2,13 +2,12 @@
 /PLAN.md
 /PROBLEM.md
 
-# Dependencies and build output
 node_modules/
 dist/
 
-# Secrets
 .env
 
 CLAUDE.md
 DECISIONS.md
 PROJECT_PHASES.md
+IP.md

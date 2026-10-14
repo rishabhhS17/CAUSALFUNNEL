@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 const productSchema = new mongoose.Schema(
   {
-    // Readable id used in URLs, e.g. /products/classic-white-tee
     slug: { type: String, required: true, unique: true },
     name: { type: String, required: true },
     price: { type: Number, required: true },

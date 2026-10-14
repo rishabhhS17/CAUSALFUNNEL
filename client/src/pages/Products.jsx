@@ -8,7 +8,6 @@ export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
   const category = searchParams.get("category") || "";
 
-  // Remember which category the result belongs to; a mismatch means "still loading"
   const [result, setResult] = useState({ category: null, products: [], error: null });
   const loading = result.category !== category;
   const { products, error } = result;
@@ -20,7 +19,6 @@ export default function Products() {
       .then((data) => !ignore && setResult({ category, products: data, error: null }))
       .catch((err) => !ignore && setResult({ category, products: [], error: err.message }));
 
-    // Drop a slow response if the category changed in the meantime
     return () => {
       ignore = true;
     };
