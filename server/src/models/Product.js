@@ -7,11 +7,8 @@ const productSchema = new mongoose.Schema(
     price: { type: Number, required: true },
     category: { type: String, required: true },
     description: { type: String, default: "" },
-
-    // No real images: the store draws a coloured tile with an emoji instead
     color: { type: String, default: "#e5e7eb" },
     emoji: { type: String, default: "🛍️" },
-
     sizes: { type: [String], default: [] },
   },
   { timestamps: true }

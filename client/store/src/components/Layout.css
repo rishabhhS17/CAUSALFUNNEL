@@ -1,0 +1,14 @@
+.layout-main {
+  width: var(--page-width);
+  margin: 0 auto;
+  padding: 16px 0 40px;
+  min-height: calc(100vh - 120px);
+}
+
+.layout-footer {
+  background: #172337;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  font-size: 13px;
+}

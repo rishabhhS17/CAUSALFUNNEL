@@ -1,0 +1,44 @@
+.thank-you {
+  padding: 60px;
+  text-align: center;
+}
+
+.thank-you-check {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  font-size: 40px;
+  line-height: 72px;
+}
+
+.thank-you h1 {
+  font-size: 24px;
+}
+
+.thank-you p {
+  color: var(--muted);
+  margin: 10px 0 28px;
+}
+
+.thank-you-details {
+  display: flex;
+  gap: 48px;
+  width: fit-content;
+  padding: 16px 32px;
+  margin: 0 auto 32px;
+  border: 1px solid var(--border);
+}
+
+.thank-you-details div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.thank-you-details span {
+  color: var(--muted);
+  font-size: 13px;
+}

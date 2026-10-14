@@ -1,0 +1,35 @@
+.product-card {
+  display: block;
+  padding: 16px;
+  color: var(--text);
+  transition: box-shadow 0.15s;
+}
+
+.product-card:hover {
+  box-shadow: 0 3px 16px rgba(0, 0, 0, 0.12);
+}
+
+.product-card-name {
+  margin-top: 12px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.product-card-category {
+  color: var(--muted);
+  font-size: 13px;
+  text-transform: capitalize;
+  margin-top: 2px;
+}
+
+.product-card-price {
+  font-size: 17px;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+.product-card-delivery {
+  color: var(--green);
+  font-size: 12px;
+  margin-top: 4px;
+}

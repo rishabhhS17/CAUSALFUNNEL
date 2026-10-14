@@ -1,0 +1,92 @@
+.detail {
+  display: flex;
+  gap: 32px;
+  padding: 24px;
+}
+
+.detail-left {
+  width: 440px;
+}
+
+.detail-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.detail-actions .btn {
+  flex: 1;
+}
+
+.detail-added {
+  margin-top: 12px;
+  color: var(--green);
+  font-weight: 500;
+  text-align: center;
+}
+
+.detail-info {
+  flex: 1;
+}
+
+.detail-category {
+  color: var(--muted);
+  text-transform: capitalize;
+}
+
+.detail-name {
+  font-size: 24px;
+  margin: 6px 0 12px;
+}
+
+.detail-price {
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.detail-delivery {
+  color: var(--green);
+  margin-top: 6px;
+}
+
+.detail-section {
+  margin-top: 28px;
+}
+
+.detail-section h3 {
+  font-size: 16px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.detail-section p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.detail-size-list {
+  display: flex;
+  gap: 10px;
+}
+
+.detail-size {
+  min-width: 48px;
+  padding: 10px 12px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.detail-size.active {
+  border: 2px solid var(--blue);
+  color: var(--blue);
+}
+
+.detail-hint {
+  margin-top: 8px;
+  color: var(--red);
+  font-size: 13px;
+}
