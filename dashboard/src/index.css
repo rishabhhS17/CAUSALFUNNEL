@@ -1,0 +1,92 @@
+:root {
+  --bg: #f4f5f7;
+  --card: #ffffff;
+  --text: #1f2933;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --accent: #4f46e5;
+  --accent-soft: #eef2ff;
+  --click: #dc2626;
+  --view: #2563eb;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --page-width: 1240px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: var(--page-width);
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  font-size: 14px;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-weight: 600;
+}
+
+code {
+  font-family: Consolas, monospace;
+  font-size: 13px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+
+.page-title {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.status {
+  padding: 40px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.status-error {
+  color: var(--click);
+}
+
+.btn {
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--card);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}

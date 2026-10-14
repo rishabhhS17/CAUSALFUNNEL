@@ -1,0 +1,31 @@
+.session-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.session-table th {
+  text-align: left;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.session-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.session-table tbody tr {
+  cursor: pointer;
+}
+
+.session-table tbody tr:hover {
+  background: var(--accent-soft);
+}
+
+.session-table tbody tr:last-child td {
+  border-bottom: none;
+}

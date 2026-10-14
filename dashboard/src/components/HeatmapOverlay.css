@@ -1,0 +1,34 @@
+.heatmap-frame {
+  position: relative;
+  border: 1px solid var(--border);
+  background: #fff;
+  overflow: hidden;
+}
+
+.heatmap-frame iframe {
+  display: block;
+  border: none;
+}
+
+.heatmap-layer {
+  position: absolute;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.15);
+}
+
+.heat-dot {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  border-radius: 50%;
+  background: rgba(220, 38, 38, 0.6);
+  border: 2px solid #fff;
+  box-shadow: 0 0 6px rgba(220, 38, 38, 0.8);
+}
+
+.heat-cell {
+  position: absolute;
+  background: rgb(220, 38, 38);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}

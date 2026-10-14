@@ -1,0 +1,50 @@
+.topbar {
+  background: #111827;
+  height: 56px;
+}
+
+.topbar-inner {
+  width: var(--page-width);
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.topbar-logo {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.topbar-tag {
+  color: #a5b4fc;
+  font-size: 12px;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.topbar-links {
+  display: flex;
+  gap: 28px;
+}
+
+.topbar-links a {
+  color: #d1d5db;
+  font-weight: 500;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+}
+
+.topbar-links a.active {
+  color: #fff;
+  border-bottom-color: #a5b4fc;
+}
+
+.layout-main {
+  width: var(--page-width);
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+}
