@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { getPages, getHeatmap } from "../api.js";
+import { getPages, getHeatmap, STORE_URL } from "../api.js";
 import { useFetch } from "../hooks/useFetch.js";
 import { pagePath, shortId, plural } from "../utils/format.js";
 import HeatmapOverlay from "../components/HeatmapOverlay.jsx";
 import "./Heatmap.css";
+
+function storePages(list) {
+  const origin = new URL(STORE_URL).origin;
+  return list.filter((page) => page.page_url.startsWith(`${origin}/`));
+}
 
 function Controls({ pages, url, mode, onPage, onMode }) {
   return (
@@ -49,10 +54,12 @@ function SessionFilter({ session, onClear }) {
 export default function Heatmap() {
   const [params, setParams] = useSearchParams();
   const [mode, setMode] = useState("dots");
-  const { data: pages, error, loading } = useFetch(getPages, "pages");
+  const { data, error, loading } = useFetch(getPages, "pages");
 
   if (loading) return <p className="status">Loading pages…</p>;
   if (error) return <p className="status status-error">Could not load pages: {error}</p>;
+
+  const pages = storePages(data);
   if (pages.length === 0) return <p className="status">No pages tracked yet. Click around the store first.</p>;
 
   const url = params.get("url") || pages[0].page_url;
