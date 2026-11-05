@@ -13,7 +13,6 @@ const eventSchema = new mongoose.Schema(
 
     x: Number,
     y: Number,
-    x_percent: Number,
     target: {
       tag: String,
       id: String,

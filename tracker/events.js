@@ -41,11 +41,10 @@ export function trackClick(e) {
   if (el?.closest("[data-cf-ignore]")) {
     return;
   }
-  const pageWidth = document.documentElement.scrollWidth || window.innerWidth;
   record("click", {
     x: Math.round(e.pageX),
     y: Math.round(e.pageY),
-    x_percent: Math.round((e.pageX / pageWidth) * 10000) / 100,
+    y_percent: Math.round((e.pageY / window.innerHeight) * 10000) / 100,
     target: el ? describe(el.closest(CLICKABLE) || el) : null,
   });
 }

@@ -1,6 +1,6 @@
 import { Event } from "../models/Event.js";
 
-const clickFields = { _id: 0, x: 1, y: 1, x_percent: 1, viewport_width: 1, page_height: 1 };
+const clickFields = { _id: 0, x: 1, y: 1,viewport_width: 1, page_height: 1 };
 
 export async function findPages() {
   return Event.aggregate([

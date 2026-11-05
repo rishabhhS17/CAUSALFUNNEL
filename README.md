@@ -146,7 +146,7 @@ CausalFunnel/
   "event_type": "click",
   "page_url": "http://localhost:5173/products/leather-boots",
   "timestamp": "2026-10-15T08:15:39.000Z",
-  "x": 214, "y": 536, "x_percent": 34.2,
+  "x": 214, "y": 536,
   "viewport_width": 1366, "page_height": 800,
   "target": { "tag": "button", "id": null, "text": "Add to cart" }
 }
